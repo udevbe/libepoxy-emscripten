@@ -45,36 +45,12 @@
 #define KHRONOS_SUPPORT_FLOAT   1
 #define KHRONOS_APIATTRIBUTES
 
-#ifndef _WIN32
-/* APIENTRY and GLAPIENTRY are not used on Linux or Mac. */
 #define APIENTRY
 #define GLAPIENTRY
 #define EPOXY_CALLSPEC
 #define GLAPI
 #define KHRONOS_APIENTRY
 #define KHRONOS_APICALL
-
-#else
-#ifndef APIENTRY
-#define APIENTRY __stdcall
-#endif
-
-#ifndef GLAPIENTRY
-#define GLAPIENTRY APIENTRY
-#endif
-
-#ifndef EPOXY_CALLSPEC
-#define EPOXY_CALLSPEC __stdcall
-#endif
-
-#ifndef GLAPI
-#define GLAPI extern
-#endif
-
-#define KHRONOS_APIENTRY __stdcall
-#define KHRONOS_APICALL __declspec(dllimport) __stdcall
-
-#endif /* _WIN32 */
 
 #ifndef APIENTRYP
 #define APIENTRYP APIENTRY *

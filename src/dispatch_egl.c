@@ -28,55 +28,9 @@
 #include "dispatch_common.h"
 
 int
-epoxy_conservative_egl_version(void)
-{
-    EGLDisplay dpy = eglGetCurrentDisplay();
-
-    if (!dpy)
-        return 14;
-
-    return epoxy_egl_version(dpy);
-}
-
-/**
- * @brief Returns the version of OpenGL we are using
- *
- * The version is encoded as:
- *
- * ```
- *
- *   version = major * 10 + minor
- *
- * ```
- *
- * So it can be easily used for version comparisons.
- *
- * @param The EGL display
- *
- * @return The encoded version of EGL we are using
- *
- * @see epoxy_gl_version()
- */
-int
 epoxy_egl_version(EGLDisplay dpy)
 {
-    int major, minor;
-    const char *version_string;
-    int ret;
-
-    version_string = eglQueryString(dpy, EGL_VERSION);
-    if (!version_string)
-        return 0;
-
-    ret = sscanf(version_string, "%d.%d", &major, &minor);
-    assert(ret == 2);
-    return major * 10 + minor;
-}
-
-bool
-epoxy_conservative_has_egl_extension(const char *ext)
-{
-    return epoxy_has_egl_extension(eglGetCurrentDisplay(), ext);
+    return 14;
 }
 
 /**
@@ -93,7 +47,9 @@ epoxy_conservative_has_egl_extension(const char *ext)
 bool
 epoxy_has_egl_extension(EGLDisplay dpy, const char *ext)
 {
-    return epoxy_extension_in_string(eglQueryString(dpy, EGL_EXTENSIONS), ext) || epoxy_extension_in_string(eglQueryString(NULL, EGL_EXTENSIONS), ext);
+//    return epoxy_extension_in_string(eglQueryString(dpy, EGL_EXTENSIONS), ext) || epoxy_extension_in_string(eglQueryString(NULL, EGL_EXTENSIONS), ext);
+    // TODO by default emscripten does not implement any egl extensions, see if we need to mimic any egl extensions get wayland working?
+    return false;
 }
 
 /**
@@ -106,17 +62,5 @@ epoxy_has_egl_extension(EGLDisplay dpy, const char *ext)
 bool
 epoxy_has_egl(void)
 {
-#if !PLATFORM_HAS_EGL
-    return false;
-#else
-    if (epoxy_load_egl(false, true)) {
-        EGLDisplay* (* pf_eglGetCurrentDisplay) (void);
-
-        pf_eglGetCurrentDisplay = epoxy_conservative_egl_dlsym("eglGetCurrentDisplay", false);
-        if (pf_eglGetCurrentDisplay)
-            return true;
-    }
-
-    return false;
-#endif /* PLATFORM_HAS_EGL */
+    return true;
 }

@@ -38,20 +38,10 @@
 #endif
 
 #ifndef EPOXY_PUBLIC
-# if defined(_MSC_VER)
-#  define EPOXY_PUBLIC __declspec(dllimport) extern
-# else
 #  define EPOXY_PUBLIC extern
-# endif
 #endif
 
-#if defined(_MSC_VER) && !defined(__bool_true_false_are_defined) && (_MSC_VER < 1800)
-typedef unsigned char bool;
-# define false 0
-# define true 1
-#else
 # include <stdbool.h>
-#endif
 
 EPOXY_BEGIN_DECLS
 

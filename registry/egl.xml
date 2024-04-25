@@ -176,7 +176,7 @@
          tokens are reused for different purposes in different
          extensions and API versions). -->
 
-    <enums namespace="EGL" start="0x0000" end="0x2FFF" vendor="KHR" comment="Reserved for enumerants shared with WGL, GLX, and GL">
+    <enums namespace="EGL" start="0x0000" end="0x2FFF" vendor="KHR" comment="Reserved for enumerants shared with GL">
         <enum value="0" name="EGL_CONTEXT_RELEASE_BEHAVIOR_NONE_KHR"/>
         <enum value="0x2097" name="EGL_CONTEXT_RELEASE_BEHAVIOR_KHR"/>
         <enum value="0x2098" name="EGL_CONTEXT_RELEASE_BEHAVIOR_FLUSH_KHR"/>

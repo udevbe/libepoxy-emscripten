@@ -37,11 +37,8 @@
 #include <dlfcn.h>
 #include "epoxy/gl.h"
 #include "epoxy/egl.h"
-#include "epoxy/glx.h"
 
 #include "egl_common.h"
-#include "glx_common.h"
-#include "dlwrap.h"
 
 static bool
 make_egl_current_and_test(EGLDisplay *dpy, EGLContext ctx)
@@ -116,11 +113,6 @@ main(int argc, char **argv)
     EGLDisplay *egl_dpy;
     EGLContext egl_ctx;
 
-    /* Force epoxy to have loaded both EGL and GLX libs already -- we
-     * can't assume anything about symbol resolution based on having
-     * EGL or GLX loaded.
-     */
-    (void)glXGetCurrentContext();
     (void)eglGetCurrentContext();
 
     init_egl(&egl_dpy, &egl_ctx);

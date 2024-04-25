@@ -1,19 +1,8 @@
 headers = [ 'common.h' ]
 
-# GL is always generated
 generated_headers = [ [ 'gl.h', 'gl_generated.h', gl_registry ] ]
+generated_headers += [ [ 'egl.h', 'egl_generated.h', egl_registry ] ]
 
-if build_egl
-  generated_headers += [ [ 'egl.h', 'egl_generated.h', egl_registry ] ]
-endif
-
-if build_glx
-  generated_headers += [ [ 'glx.h', 'glx_generated.h', glx_registry ] ]
-endif
-
-if build_wgl
-  generated_headers += [ [ 'wgl.h', 'wgl_generated.h', wgl_registry ] ]
-endif
 
 gen_headers = []
 

@@ -44,8 +44,7 @@ endif
 # Maintain compatibility with autotools; see: https://github.com/anholt/libepoxy/issues/108
 darwin_versions = [1, '1.0']
 
-epoxy_deps = [ dl_dep, ]
-epoxy_deps += [ elg_headers_dep, ]
+epoxy_deps = [ egl_headers_dep, ]
 
 
 libepoxy = library(

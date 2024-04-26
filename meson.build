@@ -87,7 +87,3 @@ libepoxy_inc = [
 
 subdir('include/epoxy')
 subdir('src')
-
-if get_option('tests')
-  subdir('test')
-endif

@@ -76,7 +76,7 @@ meson.override_dependency('epoxy', libepoxy_dep)
 # not needed when building Epoxy; we do want to add them to the generated
 # pkg-config file, for consumers of Epoxy
 gl_reqs = []
-gl_reqs += 'gl'
+gl_reqs += 'glesv2'
 gl_reqs += 'egl'
 
 pkg = import('pkgconfig')

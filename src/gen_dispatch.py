@@ -564,7 +564,6 @@ class Generator(object):
                                                                                                        func.name))
             self.outln('                                providers, entrypoints);')
         else:
-            print(f'providers[0].name={providers[0].name}  func.name={func.name}\n')
             assert providers[0].name == func.name
             self.outln('    return {0}_single_resolver({1}, {2} /* {3} */);'.format(self.target,
                                                                                     providers[0].enum,

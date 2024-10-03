@@ -334,7 +334,7 @@ class Generator(object):
                     condition = 'epoxy_egl_version(NULL) >= {0}'.format(version)
                 else:
                     condition = 'true'
-                loader = 'emscripten_GetProcAddress({0})'
+                loader = 'epoxy_em_eglGetProcAddress({0})'
             elif api == 'wgl':
                 human_name = 'WGL {0}'.format(version)
                 condition = 'false'
@@ -352,12 +352,12 @@ class Generator(object):
 
             self.supported_extensions.add(extname)
 
-            # 'supported' is a set of strings like gl, gles1, gles2,
-            # or glx, which are separated by '|'
+            # 'supported' is a set of strings like gl, gles1 or gles2
+            # which are separated by '|'
             apis = extension.get('supported').split('|')
             if 'egl' in apis:
                 condition = 'epoxy_has_egl_extension(NULL,"{0}")'.format(extname)
-                loader = 'emscripten_GetProcAddress({0})'
+                loader = 'epoxy_em_eglGetProcAddress({0})'
                 self.process_require_statements(extension, condition, loader, extname)
             if {'gl', 'gles1', 'gles2'}.intersection(apis):
                 condition = 'epoxy_has_gl_extension("{0}")'.format(extname)
@@ -648,6 +648,7 @@ class Generator(object):
                 for c in func.name:
                     self.outln("   '{0}',".format(c))
                 self.outln('   0, // {0}'.format(func.name))
+        self.outln('    0 };')
         self.outln('    0 };')
         # We're using uint16_t for the offsets.
         #assert(offset < 65536)

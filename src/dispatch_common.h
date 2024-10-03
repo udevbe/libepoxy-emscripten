@@ -37,8 +37,9 @@
     static void EPOXY_CALLSPEC                                   \
     name##_global_rewrite_ptr args                               \
     {                                                            \
-        if (name == (void *)name##_global_rewrite_ptr)           \
+        if (name == (void *)name##_global_rewrite_ptr) {         \
             name = (void *)name##_resolver();                    \
+        }                                                        \
         name passthrough;                                        \
     }
 
@@ -46,8 +47,9 @@
     static ret EPOXY_CALLSPEC                                    \
     name##_global_rewrite_ptr args                               \
     {                                                            \
-        if (name == (void *)name##_global_rewrite_ptr)           \
+        if (name == (void *)name##_global_rewrite_ptr) {         \
             name = (void *)name##_resolver();                    \
+        }                                                        \
         return name passthrough;                                 \
     }
 
@@ -69,3 +71,4 @@
 
 // "bootstrap" functions
 void * epoxy_em_bootstrap(const char * name);
+void * epoxy_em_eglGetProcAddress(const char * str);

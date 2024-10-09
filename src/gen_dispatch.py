@@ -649,7 +649,6 @@ class Generator(object):
                     self.outln("   '{0}',".format(c))
                 self.outln('   0, // {0}'.format(func.name))
         self.outln('    0 };')
-        self.outln('    0 };')
         # We're using uint16_t for the offsets.
         #assert(offset < 65536)
         self.outln('')
